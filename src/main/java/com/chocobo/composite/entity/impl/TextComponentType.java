@@ -1,4 +1,4 @@
-package com.chocobo.composite.entity;
+package com.chocobo.composite.entity.impl;
 
 public enum TextComponentType {
 

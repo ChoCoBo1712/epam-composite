@@ -1,4 +1,6 @@
-package com.chocobo.composite.entity;
+package com.chocobo.composite.entity.impl;
+
+import com.chocobo.composite.entity.TextComponent;
 
 import java.util.ArrayList;
 import java.util.List;

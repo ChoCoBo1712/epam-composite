@@ -1,4 +1,6 @@
-package com.chocobo.composite.entity;
+package com.chocobo.composite.entity.impl;
+
+import com.chocobo.composite.entity.TextComponent;
 
 public class Symbol implements TextComponent {
 
