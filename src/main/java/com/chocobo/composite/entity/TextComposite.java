@@ -20,4 +20,10 @@ public class TextComposite implements TextComponent {
     public void remove(TextComponent component) {
         components.remove(component);
     }
+
+    @Override
+    public String toString() {
+        return "";
+        // TODO: 06.05.2021 implement
+    }
 }
