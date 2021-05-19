@@ -3,6 +3,8 @@ package com.chocobo.composite.entity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class Symbol extends AbstractTextComponent {
 
     private static final Logger logger = LogManager.getLogger();
@@ -26,8 +28,8 @@ public class Symbol extends AbstractTextComponent {
     }
 
     @Override
-    public AbstractTextComponent getChild(int index) {
-        logger.error("getChild() not supported in leaf");
+    public List<AbstractTextComponent> getChildren(int index) {
+        logger.error("getChildren() not supported in leaf");
         throw new UnsupportedOperationException();
     }
 

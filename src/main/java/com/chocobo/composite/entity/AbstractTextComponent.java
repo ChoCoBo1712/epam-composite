@@ -1,5 +1,7 @@
 package com.chocobo.composite.entity;
 
+import java.util.List;
+
 public abstract class AbstractTextComponent implements Cloneable {
 
     private final TextComponentType type;
@@ -8,22 +10,11 @@ public abstract class AbstractTextComponent implements Cloneable {
         this.type = type;
     }
 
-    @Override
-    public final AbstractTextComponent clone(){
-        AbstractTextComponent textComponent = null;
-        try {
-            textComponent = (AbstractTextComponent) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return textComponent;
-    }
-
     public TextComponentType getType() {
         return type;
     }
 
     public abstract void add(AbstractTextComponent component);
     public abstract void remove(AbstractTextComponent component);
-    public abstract AbstractTextComponent getChild(int index);
+    public abstract List<AbstractTextComponent> getChildren(int index);
 }

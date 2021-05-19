@@ -21,8 +21,8 @@ public class TextComposite extends AbstractTextComponent {
     }
 
     @Override
-    public AbstractTextComponent getChild(int index) {
-        return components.get(index).clone();
+    public List<AbstractTextComponent> getChildren(int index) {
+        return new ArrayList<>(components);
     }
 
     @Override
