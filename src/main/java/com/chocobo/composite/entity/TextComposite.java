@@ -31,13 +31,13 @@ public class TextComposite extends AbstractTextComponent {
 
         components.forEach(component -> {
             TextComponentType type = component.getType();
-            String prefix = type.getPrefix();
-            String suffix = type.getPostfix();
-            stringBuilder.append(prefix).append(component).append(suffix);
+            String postfix = type.getPostfix();
+            stringBuilder.append(component).append(postfix);
         });
 
-        return (getType() == TextComponentType.TEXT)
+        TextComponentType componentType = getType();
+        return (componentType == TextComponentType.TEXT || componentType == TextComponentType.PARAGRAPH)
                 ? stringBuilder.toString().stripTrailing()
-                : stringBuilder.toString().strip();
+                : stringBuilder.toString();
     }
 }
