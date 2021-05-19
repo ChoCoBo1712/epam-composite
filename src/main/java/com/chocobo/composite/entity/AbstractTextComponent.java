@@ -16,5 +16,5 @@ public abstract class AbstractTextComponent implements Cloneable {
 
     public abstract void add(AbstractTextComponent component);
     public abstract void remove(AbstractTextComponent component);
-    public abstract List<AbstractTextComponent> getChildren(int index);
+    public abstract List<AbstractTextComponent> getChildren();
 }

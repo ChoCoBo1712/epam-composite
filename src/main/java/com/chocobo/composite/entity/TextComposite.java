@@ -21,7 +21,7 @@ public class TextComposite extends AbstractTextComponent {
     }
 
     @Override
-    public List<AbstractTextComponent> getChildren(int index) {
+    public List<AbstractTextComponent> getChildren() {
         return new ArrayList<>(components);
     }
 

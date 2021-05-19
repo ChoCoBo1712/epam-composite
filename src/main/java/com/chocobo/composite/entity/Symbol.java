@@ -28,7 +28,7 @@ public class Symbol extends AbstractTextComponent {
     }
 
     @Override
-    public List<AbstractTextComponent> getChildren(int index) {
+    public List<AbstractTextComponent> getChildren() {
         logger.error("getChildren() not supported in leaf");
         throw new UnsupportedOperationException();
     }
