@@ -2,12 +2,22 @@ package com.chocobo.composite.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TextComposite extends AbstractTextComponent {
-    private final List<AbstractTextComponent> components = new ArrayList<>();
+    private List<AbstractTextComponent> components = new ArrayList<>();
 
     public TextComposite(TextComponentType type) {
         super(type);
+    }
+
+    @Override
+    public final TextComposite clone() {
+        TextComposite textComponent = (TextComposite) super.clone();
+        textComponent.components = components.stream()
+                .map(AbstractTextComponent::clone)
+                .collect(Collectors.toList());
+        return textComponent;
     }
 
     @Override
@@ -36,8 +46,8 @@ public class TextComposite extends AbstractTextComponent {
         });
 
         TextComponentType componentType = getType();
-        return (componentType == TextComponentType.TEXT || componentType == TextComponentType.PARAGRAPH)
-                ? stringBuilder.toString().stripTrailing()
-                : stringBuilder.toString();
+        return (componentType == TextComponentType.TEXT)
+                ? stringBuilder.insert(0, "    ").toString().stripTrailing()
+                : stringBuilder.toString().strip();
     }
 }

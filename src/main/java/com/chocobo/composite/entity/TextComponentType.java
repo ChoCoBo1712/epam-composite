@@ -3,8 +3,8 @@ package com.chocobo.composite.entity;
 public enum TextComponentType {
 
     TEXT,
-    PARAGRAPH("\r\n"),
-    SENTENCE,
+    PARAGRAPH("\r\n    "),
+    SENTENCE(" "),
     LEXEME(" "),
     WORD,
     PUNCTUATION,

@@ -14,6 +14,17 @@ public abstract class AbstractTextComponent implements Cloneable {
         return type;
     }
 
+    @Override
+    public AbstractTextComponent clone() {
+        AbstractTextComponent textComponent = null;
+        try {
+            textComponent = (AbstractTextComponent) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return textComponent;
+    }
+
     public abstract void add(AbstractTextComponent component);
     public abstract void remove(AbstractTextComponent component);
     public abstract List<AbstractTextComponent> getChildren();

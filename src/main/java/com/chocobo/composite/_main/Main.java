@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -34,9 +35,20 @@ public class Main {
             System.out.println("Restored text equals initial text: " + text.equals(textCompositeString));
 
             TextService service = new TextServiceImpl();
+
             ParagraphSentenceAmountComparator paragraphComparator = new ParagraphSentenceAmountComparator();
             List<AbstractTextComponent> sortedParagraphs = service.sortParagraphs(textComposite, paragraphComparator);
             System.out.println("List of paragraphs sorted by sentence amount: " + sortedParagraphs);
+
+            List<AbstractTextComponent> sentencesWithLongestWord = service.findSentencesWithLongestWord(textComposite);
+            System.out.println("Sentences with the longest word: " + sentencesWithLongestWord);
+
+            AbstractTextComponent textWithRemovedSentences = service
+                    .removeSentencesWithWordsAmountLessThan(textComposite, 5);
+            System.out.println("Text with removed sentences:\n" + textWithRemovedSentences);
+
+            Map<String, Integer> wordsMap = service.countIdenticalWords(textComposite);
+            System.out.println("Words with number of occurrences: " + wordsMap);
         } catch (CompositeException e) {
             logger.error("Unexpected exception: ", e);
         }
