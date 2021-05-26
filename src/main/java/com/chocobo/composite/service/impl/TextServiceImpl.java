@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class TextServiceImpl implements TextService {
 
-    private static final String VOWEL_REGEX_PATTERN = "[aAeEiIoOuU]";
+    private static final String VOWEL_REGEX = "[aAeEiIoOuUyY]";
 
     @Override
     public List<AbstractTextComponent> sortParagraphs(
@@ -110,19 +110,20 @@ public class TextServiceImpl implements TextService {
     }
 
     @Override
-    public long countVowelsInSentence(AbstractTextComponent sentence) throws CompositeException {
-        if (sentence == null) {
+    public long countVowelsInSentence(AbstractTextComponent sentenceComponent) throws CompositeException {
+        if (sentenceComponent == null) {
             throw new CompositeException("Got null parameter");
         }
-        if (sentence.getType() != TextComponentType.SENTENCE) {
-            throw new CompositeException("Wrong text component type. Expected SENTENCE, got " + sentence.getType());
+        if (sentenceComponent.getType() != TextComponentType.SENTENCE) {
+            throw new CompositeException("Wrong text component type. Expected SENTENCE, got " + sentenceComponent.getType());
         }
 
-        List<AbstractTextComponent> sentenceComponents = sentence.getChildren();
+        List<AbstractTextComponent> sentenceComponents = sentenceComponent.getChildren();
         return sentenceComponents.stream()
                 .flatMap(lexeme -> lexeme.getChildren().stream())
                 .filter(word -> word.getType() == TextComponentType.WORD)
-                .filter(letter -> Pattern.matches(VOWEL_REGEX_PATTERN, letter.toString()))
+                .flatMap(word -> word.getChildren().stream())
+                .filter(letter -> Pattern.matches(VOWEL_REGEX, letter.toString()))
                 .count();
     }
 
@@ -139,7 +140,8 @@ public class TextServiceImpl implements TextService {
         return sentenceComponents.stream()
                 .flatMap(lexeme -> lexeme.getChildren().stream())
                 .filter(word -> word.getType() == TextComponentType.WORD)
-                .filter(letter -> !Pattern.matches(VOWEL_REGEX_PATTERN, letter.toString()))
+                .flatMap(word -> word.getChildren().stream())
+                .filter(letter -> !Pattern.matches(VOWEL_REGEX, letter.toString()))
                 .count();
     }
 
