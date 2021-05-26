@@ -112,16 +112,16 @@ public class TextServiceImplTest {
     }
 
     @Test(dataProvider = "sentences-amount-provider")
-    public void sortParagraphsTest(String initialText, List<Integer> expectedWordsCountList)
+    public void sortParagraphsTest(String initialText, List<Integer> expectedSentencesAmountList)
             throws CompositeException {
         AbstractTextComponent textComposite = new TextComposite(TextComponentType.TEXT);
         textParser.parse(textComposite, initialText);
-        List<Integer> actualWordsCountList = service.sortParagraphs(textComposite, paragraphComparator)
+        List<Integer> actualSentencesAmountList = service.sortParagraphs(textComposite, paragraphComparator)
                 .stream()
                 .map(component -> component.getChildren().size())
                 .collect(Collectors.toList());
 
-        Assert.assertEquals(actualWordsCountList, expectedWordsCountList);
+        Assert.assertEquals(actualSentencesAmountList, expectedSentencesAmountList);
     }
 
     @Test(dataProvider = "longest-word-provider")
@@ -151,13 +151,13 @@ public class TextServiceImplTest {
     }
 
     @Test(dataProvider = "words-count-provider")
-    public void countIdenticalWordsTest(String initialText, Map<String, Integer> expectedOccurrences)
+    public void countIdenticalWordsTest(String initialText, Map<String, Integer> expectedMap)
             throws CompositeException {
         AbstractTextComponent textComposite = new TextComposite(TextComponentType.TEXT);
         textParser.parse(textComposite, initialText);
-        Map<String, Integer> actualOccurrences = service.countIdenticalWords(textComposite);
+        Map<String, Integer> actualMap = service.countIdenticalWords(textComposite);
 
-        Assert.assertEquals(actualOccurrences, expectedOccurrences);
+        Assert.assertEquals(actualMap, expectedMap);
     }
 
     @Test(dataProvider = "sentence-for-vowels-test-provider")
